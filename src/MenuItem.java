@@ -9,11 +9,7 @@ public class MenuItem {
     private double price;
     private String description;
 
-    // 생성자의 특징
-    // 1. 클래스명과 동일하다.
-    // 2. 반환되는 데이터타입이 없다.
-    // 3. 여러 개가 존재할 수 있다.
-
+    // 생성자
     public MenuItem(String name, double price, String description) {
         this.name = name;
         this.price = price;
