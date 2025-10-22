@@ -29,7 +29,7 @@ public class Kiosk {
             System.out.println(i + ". " + menu);
             i++;
         }
-        System.out.println("0. 종료           |   종료");
+        System.out.println("0. 종료                       |   종료");
 
 
 
@@ -56,7 +56,7 @@ public class Kiosk {
                 } else {
                     // 해당 인덱스의 값 출력하기
                     System.out.println("\n선택한 메뉴: " + menuItems.get(index-1));
-                    System.out.println("0. 종료                  |   종료");
+                    System.out.println("0. 종료                              |   종료");
                 }
 
             } catch (NumberFormatException e) {

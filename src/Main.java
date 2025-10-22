@@ -9,10 +9,10 @@ public class Main {
         List<MenuItem> burgerItems = new ArrayList<>();
 
         // MenuItem 객체 생성 및 메뉴아이템s 리스트에 추가
-        burgerItems.add(new MenuItem("통새우와퍼", 8.9, "통새우, 스파이시 토마토 소스, 순쇠고기 패티가 들어간 통새우와퍼"));
-        burgerItems.add(new MenuItem("몬스터와퍼", 10.3, "디아블로 소스, 순쇠고기 패티, 치킨 패티가 들어간 몬스터와퍼"));
-        burgerItems.add(new MenuItem("콰트로치즈와퍼", 8.7, "4가지 치즈, 순쇠고기 패티가 들어간 치즈와퍼"));
-        burgerItems.add(new MenuItem("트러플머쉬룸와퍼", 9.8, "트러플 향, 4가지 버섯이 들어간 트러플머쉬룸와퍼"));
+        burgerItems.add(new MenuItem("Shrimp Whopper", 8.9, "통새우, 스파이시 토마토 소스, 순쇠고기 패티가 들어간 통새우와퍼"));
+        burgerItems.add(new MenuItem("Monster Whopper", 10.3, "디아블로 소스, 순쇠고기 패티, 치킨 패티가 들어간 몬스터와퍼"));
+        burgerItems.add(new MenuItem("QuattroCheese Whopper", 8.7, "4가지 치즈, 순쇠고기 패티가 들어간 치즈와퍼"));
+        burgerItems.add(new MenuItem("TruffleMushroom Whopper", 9.8, "트러플 향, 4가지 버섯이 들어간 트러플머쉬룸와퍼"));
 
         //  List<MenuItem> menuItems 는 Kiosk 클래스 생성자를 통해 값을 할당합니다.
         //  Kiosk 객체를 생성하고 사용하는 main 함수에서 객체를 생성할 때 값을 넘겨줍니다.

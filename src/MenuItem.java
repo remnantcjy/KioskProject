@@ -19,6 +19,6 @@ public class MenuItem {
     // 기
     @Override
     public String toString() {
-        return String.format("%-11s |   W %-5.1f |   %s", name, price, description);
+        return String.format("%-25s |   W %-5.1f |   %s", name, price, description);
     }
 }
