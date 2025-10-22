@@ -24,9 +24,14 @@ public class Kiosk {
 
         // 메뉴 출력 - 반복문을 활용해 List 안에 있는 MenuItem을 하나씩 출력
         System.out.println("[ BURGERKING \uD83D\uDC51 MENU ]");
+        int i = 1;
         for (MenuItem menu : menuItems) {
-            System.out.println(menu);
+            System.out.println(i + ". " + menu);
+            i++;
         }
+        System.out.println("0. 종료           |   종료");
+
+
 
         // 사용자 입력 변수 선언
         String userChoice;
@@ -35,7 +40,7 @@ public class Kiosk {
 
             // 유효성 검증 메서드 - 숫자 외의 값 입력시 예외처리 및 재입력
             try {
-                System.out.print("\n주문하실 메뉴의 번호를 입력해주세요(0번은 종료): ");
+                System.out.print("\n주문하실 메뉴의 번호를 입력해주세요: ");
                 // 입력된 숫자에 따른 처리
                 userChoice = sc.next();
 
@@ -43,6 +48,7 @@ public class Kiosk {
                 int index = Integer.parseInt(userChoice);
 
                 if ("0".equalsIgnoreCase(userChoice)) {
+                    System.out.println("프로그램을 종료합니다.");
                     break;
                 } else if(menuItems.size() < index) {
                     // 메뉴아이템리스트의 사이즈보다 인덱스가 클 때 재입력 받기
@@ -50,7 +56,9 @@ public class Kiosk {
                 } else {
                     // 해당 인덱스의 값 출력하기
                     System.out.println("\n선택한 메뉴: " + menuItems.get(index-1));
+                    System.out.println("0. 종료                  |   종료");
                 }
+
             } catch (NumberFormatException e) {
                 System.out.println("잘못된 입력 ❌ 메뉴 번호를 입력해주세요 ❗\uFE0F");
             }
