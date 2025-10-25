@@ -45,37 +45,48 @@ public class Kiosk {
         int categoryChoice;
 
         while (true) {
+            try {
+                // 메뉴 목록 출력
+                printMenuList();
+                categoryChoice = sc.nextInt();
 
-            // 메뉴 목록 출력
-            printMenuList();
-            categoryChoice = sc.nextInt();
+                if (0 == categoryChoice) {
+                    System.out.println("프로그램을 종료합니다.");
+                    break;
+                } else {
+                    // 사용자가 입력한 값을 인덱스로 사용하여 해당 인덱스의 카테고리를 selectedCategory에 반환받음
+                    // 반환받은 selectedCategory 카테고리를 인자값으로 넣어 printMenuItemList 메서드 호출
+                    Menu selectedCategory = totalCategory.get(categoryChoice - 1);
+                    printMenuItemList(selectedCategory);
 
-            if (0 == categoryChoice) {
-                System.out.println("프로그램을 종료합니다.");
-                break;
-            } else {
-                Menu selectedCategory = totalCategory.get(categoryChoice-1);
-                printMenuItemList(selectedCategory);
 
-                List<MenuItem> selectedMenuItem = selectedCategory.getMenuItem();
-                System.out.println("0. 뒤로가기");
+                    // 선택된 메뉴아이템을 출력해주기 위해 반환된 카테고리에서 getter를 통해
+                    // List<MenuItem>에 카테고리의 메뉴아이템을 넣어줌
+                    List<MenuItem> selectedMenuItem = selectedCategory.getMenuItem();
+                    System.out.println("0. 뒤로가기");
 
-                while (true) {
-                    try {
-                        // 메뉴아이템 or 뒤로가기 입력 변수
-                        int itemChoice = sc.nextInt();
-                        if (itemChoice == 0) {
-                            System.out.println();
-                        } else {
-                            // 해당 인덱스의 값 출력하기
-                            System.out.println("선택한 메뉴: " + selectedMenuItem.get(itemChoice-1) + "\n");
+                    while (true) {
+                        try {
+                            // 메뉴아이템 or 뒤로가기 입력 변수
+                            int itemChoice = sc.nextInt();
+                            if (itemChoice == 0) {
+                                System.out.println();
+                            } else {
+                                // 사용자가 입력한 값을 인덱스로 사용하여 해당 값 출력하기
+                                System.out.println("선택한 메뉴: " + selectedMenuItem.get(itemChoice - 1) + "\n");
+                            }
+                            break;
+                            // 예외처리 발생시 재입력 받음
+                        } catch (IndexOutOfBoundsException | InputMismatchException e) {
+                            System.out.println("잘못된 입력 ❌ 메뉴 번호를 입력해주세요 ❗");
+                            sc.nextLine();
                         }
-                        break;
-                    } catch (IndexOutOfBoundsException | InputMismatchException e) {
-                        System.out.println("잘못된 입력 ❌ 메뉴 번호를 입력해주세요 ❗");
-                        sc.nextLine();
                     }
                 }
+                // 예외처리 발생시 재입력 받음
+            } catch (IndexOutOfBoundsException | InputMismatchException e) {
+                System.out.println("잘못된 입력 ❌ 메뉴 번호를 입력해주세요 ❗\n");
+                sc.nextLine();
             }
         }
     }
