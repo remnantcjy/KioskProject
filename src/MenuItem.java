@@ -21,4 +21,17 @@ public class MenuItem {
     public String toString() {
         return String.format("%-25s |   W %-5.1f |   %s", name, price, description);
     }
+
+    // getter 생성
+    public String getName() {
+        return this.name;
+    }
+
+    public double getPrice() {
+        return this.price;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
 }
