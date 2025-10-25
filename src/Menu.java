@@ -9,7 +9,7 @@ public class Menu {
 
     //MenuItem을 관리하는 리스트가 필드로 존재합니다.
     // 각 메뉴들을 저장할 리스트 !!! ex. 햄버거류, 음료류, 사이드류 등 - 공통 변수명 느낌으로 작성
-    List<MenuItem> menuItem = new ArrayList<>();
+    private List<MenuItem> menuItem = new ArrayList<>();
 
 
     // 생

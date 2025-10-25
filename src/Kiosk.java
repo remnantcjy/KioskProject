@@ -6,7 +6,7 @@ import java.util.Scanner;
 // 키오스크 프로그램의 메뉴를 관리하고 사용자 입력을 처리하는 클래스
 public class Kiosk {
     // 속성
-    List<Menu> totalCategory;
+    private List<Menu> totalCategory;
 
     // List<Menu>로 변경 <Menu> - 메뉴랑 메뉴 아이템 관계처럼
     // 생성자
