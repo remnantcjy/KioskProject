@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,8 +15,6 @@ public class Kiosk {
     }
 
     // 기능
-
-
     public void printMenuList() {
         System.out.println("[ MAIN MENU ]");
         int i = 1;
@@ -37,18 +36,20 @@ public class Kiosk {
         }
     }
 
+
+    // 키오스크 실행 메서드
     public void start() {
         Scanner sc = new Scanner(System.in);
-
-        List<Menu> totalCategoryList = totalCategory;
 
         // 카테고리 번호를 입력할 변수 선언
         int categoryChoice;
 
         while (true) {
+
             // 메뉴 목록 출력
             printMenuList();
             categoryChoice = sc.nextInt();
+
             if (0 == categoryChoice) {
                 System.out.println("프로그램을 종료합니다.");
                 break;
@@ -59,13 +60,21 @@ public class Kiosk {
                 List<MenuItem> selectedMenuItem = selectedCategory.getMenuItem();
                 System.out.println("0. 뒤로가기");
 
-                // 메뉴아이템 or 뒤로가기 입력 변수
-                int itemChoice = sc.nextInt();
-                if (itemChoice == 0) {
-                    System.out.println();
-                    continue;
-                } else {
-                    System.out.println("선택한 메뉴: " + selectedMenuItem.get(itemChoice-1) + "\n");
+                while (true) {
+                    try {
+                        // 메뉴아이템 or 뒤로가기 입력 변수
+                        int itemChoice = sc.nextInt();
+                        if (itemChoice == 0) {
+                            System.out.println();
+                        } else {
+                            // 해당 인덱스의 값 출력하기
+                            System.out.println("선택한 메뉴: " + selectedMenuItem.get(itemChoice-1) + "\n");
+                        }
+                        break;
+                    } catch (IndexOutOfBoundsException | InputMismatchException e) {
+                        System.out.println("잘못된 입력 ❌ 메뉴 번호를 입력해주세요 ❗");
+                        sc.nextLine();
+                    }
                 }
             }
         }
