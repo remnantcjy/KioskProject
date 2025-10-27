@@ -6,34 +6,11 @@ import java.util.Scanner;
 // 키오스크 프로그램의 메뉴를 관리하고 사용자 입력을 처리하는 클래스
 public class Kiosk {
     // 속성
-    private List<Menu> totalCategory;
+    private List<Menu> menuList;
 
-    // List<Menu>로 변경 <Menu> - 메뉴랑 메뉴 아이템 관계처럼
     // 생성자
-    public Kiosk(List<Menu> totalCategory) {
-        this.totalCategory = totalCategory;
-    }
-
-    // 기능
-    public void printMenuList() {
-        System.out.println("[ MAIN MENU ]");
-        int i = 1;
-        for (Menu menu : totalCategory) {
-            System.out.println(i + ". " + menu.getMenu());
-            i++;
-        }
-        System.out.println("0. 종료       |   종료");
-    }
-
-    // 메뉴 객체 받음 - 메뉴 객체 안에 메뉴아이템 리스트가 있음.
-    public void printMenuItemList(Menu selectedCategory) {
-        List<MenuItem> selectedMenuItem = selectedCategory.getMenuItem();
-
-        System.out.println();
-
-        for (int i=0; i<selectedMenuItem.size(); i++) {
-            System.out.println(i+1 + ". " + selectedMenuItem.get(i));
-        }
+    public Kiosk(List<Menu> menuList) {
+        this.menuList = menuList;
     }
 
 
@@ -41,53 +18,83 @@ public class Kiosk {
     public void start() {
         Scanner sc = new Scanner(System.in);
 
-        // 카테고리 번호를 입력할 변수 선언
-        int categoryChoice;
-
         while (true) {
             try {
-                // 메뉴 목록 출력
-                printMenuList();
-                categoryChoice = sc.nextInt();
+                // 1. 카테고리 처리
+                handleCategory();
 
-                if (0 == categoryChoice) {
-                    System.out.println("프로그램을 종료합니다.");
+                // 2. 메뉴아이템 처리
+                if (handleMenuItem(sc)) {
                     break;
-                } else {
-                    // 사용자가 입력한 값을 인덱스로 사용하여 해당 인덱스의 카테고리를 selectedCategory에 반환받음
-                    // 반환받은 selectedCategory 카테고리를 인자값으로 넣어 printMenuItemList 메서드 호출
-                    Menu selectedCategory = totalCategory.get(categoryChoice - 1);
-                    printMenuItemList(selectedCategory);
-
-
-                    // 선택된 메뉴아이템을 출력해주기 위해 반환된 카테고리에서 getter를 통해
-                    // List<MenuItem>에 카테고리의 메뉴아이템을 넣어줌
-                    List<MenuItem> selectedMenuItem = selectedCategory.getMenuItem();
-                    System.out.println("0. 뒤로가기");
-
-                    while (true) {
-                        try {
-                            // 메뉴아이템 or 뒤로가기 입력 변수
-                            int itemChoice = sc.nextInt();
-                            if (itemChoice == 0) {
-                                System.out.println();
-                            } else {
-                                // 사용자가 입력한 값을 인덱스로 사용하여 해당 값 출력하기
-                                System.out.println("선택한 메뉴: " + selectedMenuItem.get(itemChoice - 1) + "\n");
-                            }
-                            break;
-                            // 예외처리 발생시 재입력 받음
-                        } catch (IndexOutOfBoundsException | InputMismatchException e) {
-                            System.out.println("잘못된 입력 ❌ 메뉴 번호를 입력해주세요 ❗");
-                            sc.nextLine();
-                        }
-                    }
                 }
-                // 예외처리 발생시 재입력 받음
+                // 예외 발생시 오류 메시지 출력 및 재입력 요청
             } catch (IndexOutOfBoundsException | InputMismatchException e) {
                 System.out.println("잘못된 입력 ❌ 메뉴 번호를 입력해주세요 ❗\n");
-                sc.nextLine();
+                sc.nextLine();  // 버퍼 비우기
             }
         }
+    }
+
+    // 메뉴아이템 처리
+    private boolean handleMenuItem(Scanner sc) {
+        int inputCategory;  // 카테고리(메뉴) 변수
+
+        // 1. 사용자로부터 카테고리(메뉴) 입력
+        inputCategory = sc.nextInt();
+
+        // 1-a. 0번 입력시 프로그램 종료 메시지 출력
+        if (0 == inputCategory) {
+            System.out.println("프로그램을 종료합니다.");
+            return true;
+        } else {
+            // 2. 사용자로 입력 -> 카테고리 인덱스로 활용 -> 해당 카테고리의 메뉴아이템리스트 반환
+            List<MenuItem> menuItemList = menuList.get(inputCategory - 1).getMenuItemList();
+
+            // 2-a. 메뉴아이템 리스트를 순회하면서
+            for (MenuItem menuItem : menuItemList) {
+                // 2-b. 각 메뉴아이템을 출력
+                System.out.println(menuItem);
+            }
+
+            // 4-a. 뒤로가기(카테고리) 출력
+            System.out.println("0. 뒤로가기");
+
+            while (true) {
+                try {
+                    // 4. 사용자로부터 메뉴아이템 입력
+                    int inputMenuItem = sc.nextInt();
+
+                    // 4-b. 0 입력시 카테고리로 돌아가기
+                    if (inputMenuItem == 0) {
+                        System.out.println();
+                    } else {
+                        // 5. 사용자 입력 -> 인덱스로 활용 -> 해당 메뉴아이템 출력
+                        System.out.println("선택한 메뉴: " + menuItemList.get(inputMenuItem - 1) + "\n");
+                    }
+                    break;
+                    // 6. 예외 발생시 오류 메시지 출력 및 재입력 요청
+                } catch (IndexOutOfBoundsException | InputMismatchException e) {
+                    System.out.println("잘못된 입력 ❌ 메뉴 번호를 입력해주세요 ❗");
+                    sc.nextLine();  // 버퍼 비우기
+                }
+            }
+        }
+        return false;
+    }
+
+    // 카테고리 처리 메서드
+    private void handleCategory() {
+        // 카테고리 선택 변수
+        int inputCategory;
+
+        // 1. 카테고리 출력
+        System.out.println("[ MAIN MENU ]");
+        // 1-a. 메뉴리스트 사이즈만큼 반복문
+        for (int i=0; i<menuList.size(); i++) {
+            // 1-b. 메뉴리스트를 인덱스로 접근 -> 해당 카테고리 메뉴 출력
+            System.out.println(i+1 + ". " + menuList.get(i).getCategory());
+        }
+        // 1-c. 종료 출력
+        System.out.println("0. 종료       |   종료");
     }
 }
