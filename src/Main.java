@@ -24,8 +24,11 @@ public class Main {
         menuList.add(drinkMenu);
         menuList.add(dessertMenu);
 
+        // 의존성 x - 키오스크 구성하는 객체 한 눈에 보기 쉽다. (=근거) 한 눈에 구성하는 객체가 main에 있습니다. (정의) - 나의 규칙 ( + 논리적 근거)
+        Cart cart = new Cart();
+
         // 5. 키오스크 생성 및 메뉴리스트 값 할당
-        Kiosk kiosk = new Kiosk(menuList);
+        Kiosk kiosk = new Kiosk(menuList, cart);
 
         // 6. 키오스크 주문 메서드 호출
         kiosk.start();
