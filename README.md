@@ -38,4 +38,4 @@
 <br>
 
 ## 🤓 트러블슈팅 기록
-[계산기 프로젝트 트러블슈팅 보러가기](https://remnantcjy.tistory.com/entry/%F0%9F%A4%93-%ED%82%A4%EC%98%A4%EC%8A%A4%ED%81%AC-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%8A%B8%EB%9F%AC%EB%B8%94-%EC%8A%88%ED%8C%85-%F0%9F%92%A5)
+[키오스크 프로젝트 트러블슈팅 보러가기](https://remnantcjy.tistory.com/entry/%F0%9F%A4%93-%ED%82%A4%EC%98%A4%EC%8A%A4%ED%81%AC-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%8A%B8%EB%9F%AC%EB%B8%94-%EC%8A%88%ED%8C%85-%F0%9F%92%A5)
